@@ -25,7 +25,7 @@ const Model = () => {
   const ref = React.useRef<any>();
   const obj = useLoader(OBJLoader, 'https://cdn.glitch.com/61e61ba5-d086-4c7a-870a-94bb3b71b117%2FJapaneseGatesTorii_BLENDER.obj?v=1616338270651');
   const material = React.useMemo(
-    () => new THREE.PointsMaterial({ color: 0xCF2244, size: 0.1 }),
+    () => new THREE.PointsMaterial({ color: 0xffffff, size: 0.2 }),
     [],
   );
   const geo : any = obj.children[0];

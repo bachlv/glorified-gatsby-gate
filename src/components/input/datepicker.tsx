@@ -24,7 +24,6 @@ const DatePicker = ({
             onChange={onChange}
             isClearable={isClearable}
             showPopperArrow={showPopperArrow}
-            {...props}
         />
     );
 };
