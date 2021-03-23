@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@chakra-ui/gatsby-plugin": "^1.0.2",
+    "@react-three/drei": "^3.11.2",
     "gatsby": "^2.32.3",
     "gatsby-image": "^2.11.0",
     "gatsby-plugin-gatsby-cloud": "^1.0.1",
@@ -15,11 +17,20 @@
     "gatsby-source-filesystem": "^2.11.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react": "^17.0.1",
+    "react-datepicker": "^3.6.0",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^6.15.5",
+    "react-three-fiber": "^5.3.19",
+    "three": "^0.125.2"
   },
   "devDependencies": {
+    "@types/node": "^14.14.35",
+    "@types/react": "^17.0.3",
+    "@types/react-datepicker": "^3.1.8",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-helmet": "^6.1.0",
     "prettier": "2.2.1"
   },
   "keywords": [
