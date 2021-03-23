@@ -32,6 +32,8 @@ import { Inter } from '../@chakra-ui/gatsby-plugin/fonts';
 
 const AcademyPage = () => {
     const { colorMode, toggleColorMode } = useColorMode();
+    const [progress, setProgress] = React.useState<number>(0);
+
     if (colorMode === 'dark') toggleColorMode();
     return (
         <>
@@ -41,26 +43,31 @@ const AcademyPage = () => {
                 <Container
                     as={SimpleGrid}
                     maxW={'7xl'}
-                    columns={{ base: 1, lg: 2 }}
+                    columns={1}
                     spacing={[{ base: 10, lg: 32 }]}
                     // py={{ base: 10, sm: 20, lg: 32 }}
-                    m="auto">
-                    <Stack spacing={{ base: 10, md: 10 }}>
-                        <Heading
-                            textAlign={['center', 'center', 'left']}
-                            lineHeight={1.1}
-                            fontSize={['3xl', '3xl', '5xl', '5xl', ]}>
-                            Trở thành Bug Hunter Số 1
-                        </Heading>
-                    </Stack>
+                    m="auto"
+                >
+                    {progress === 0 &&
+                        <Stack spacing={{ base: 10, md: 10 }}>
+                            <Heading
+                                textAlign={['center', 'center']}
+                                lineHeight={2.1}
+                                fontSize={['3xl', '3xl', '5xl', '5xl', ]}
+                                marginBottom={4}
+                            >
+                                Trở thành Bug Hunter Số 1
+                            </Heading>
+                        </Stack>
+                    }
                     <Stack
                         bg={'gray.50'}
                         rounded={'xl'}
                         p={{ base: 4, sm: 6, md: 8 }}
-                        spacing={{ base: 8 }}
+                        spacing={1}
                         maxW={{ lg: 'lg' }}
                         m="auto">
-                        <SignupForm />
+                        <SignupForm progress={progress} setProgress={setProgress} />
                     </Stack>
                 </Container>
             </Flex>

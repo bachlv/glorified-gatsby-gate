@@ -5,32 +5,47 @@ import { SignupFormData } from '../../declaration';
 import DatePicker from './datepicker';
 import SuccessfullySubmitForm from "./successfully-submit-form";
 
+function validateEmail(email: string): boolean {
+    return /^\S+@\S+$/.test(email);
+}
+interface Props {
+    progress: number;
+    setProgress: React.Dispatch<React.SetStateAction<number>>;
+}
 
-const SignupForm = () => {
+const SignupForm = (props: Props) => {
+    const { progress, setProgress } = props;
     const toast = useToast();
     const { register, setValue, handleSubmit, errors } = useForm<SignupFormData>();
     const [email, setEmail] = React.useState<string>("");
     const [dob, setDate] = React.useState<Date>(null)
-    const [progress, setProgress] = React.useState<number>(0);
 
     const onSubmit = handleSubmit(async ({ name, gender, email, phone, job }) => {
         if (!dob) {
-            toast({
+            return toast({
                 title: "Đăng ký thất bại",
                 description: "Bạn chưa điền ngày sinh",
                 status: "error",
                 duration: 2000,
                 isClosable: true,
             });
-            return;
         }
-        const requestOptions = {
+        if (!validateEmail(email)) {
+            return toast({
+                title: "Đăng ký thất bại",
+                description: "Email không đúng định dạng",
+                status: "error",
+                duration: 2000,
+                isClosable: true,
+            });
+        }
+
+        const response = await fetch('http://api.exam.acme.io/public/registrations', {
             method: 'POST',
             credentials: 'omit',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, dob: dob.getTime() / 1000, gender, email, phone, job })
-        };
-        const response = await fetch('http://api.exam.acme.io/public/registrations', requestOptions);
+        });
         const jsonResponse = await response.json();
         if (jsonResponse.statusCode === 200) {
             setEmail(email);
