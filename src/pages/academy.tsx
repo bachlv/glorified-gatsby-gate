@@ -19,7 +19,7 @@ const AcademyPage = () => {
                 <Container
                     as={SimpleGrid}
                     maxW={'7xl'}
-                    columns={{ base: 1, lg: 2 }}
+                    columns={1}
                     spacing={[{ base: 10, lg: 32 }]}
                     // py={{ base: 10, sm: 20, lg: 32 }}
                     m="auto">
