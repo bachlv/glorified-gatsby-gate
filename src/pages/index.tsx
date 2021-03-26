@@ -13,10 +13,10 @@ import { RobotoMono } from '../@chakra-ui/gatsby-plugin/fonts';
 const IndexPage = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [progress, setProgress] = React.useState<number>(0);
-    const [size, setSize] = React.useState("md");
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    // if (colorMode === 'light') toggleColorMode();
+    React.useEffect(() => { if (colorMode === 'light') toggleColorMode(); })
+
     return (
         <>
             <SEO title="Đăng ký khóa học" />
@@ -31,7 +31,7 @@ const IndexPage = () => {
                             <Divider orientation="horizontal" mb={4} />
                             <div>
                                 <Text display="inline">
-                                    Khoá học duy đất về bug hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu,
+                                    Khoá học duy đất về Bug Hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu,
                                     dễ liên tưởng, kèm theo đó là các ví dụ,
                                     dẫn chứng và phân tích các lỗi bảo mật đã xảy ra trong thực tế.
                                 </Text>

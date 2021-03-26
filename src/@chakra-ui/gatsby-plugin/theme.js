@@ -4,8 +4,7 @@ import { defaultFont } from './fonts';
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'light',
-    useSystemColorMode: false,
+    initialColorMode: 'dark',
   },
   fonts: {
     heading: defaultFont,
