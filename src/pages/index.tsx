@@ -19,7 +19,7 @@ const IndexPage = () => {
 
     React.useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://www.google.com/recaptcha/api.js?render=process.env.GATSBY_SITE_KEY';
+        script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.GATSBY_CAPTCHA_KEY}`;
         script.async = true;
         document.body.appendChild(script);
     }, []);

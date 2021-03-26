@@ -5,6 +5,11 @@ import { SignupFormData } from '../../declaration';
 import DatePicker from './datepicker';
 import SuccessfullySubmitForm from "./successfully-submit-form";
 
+type RegisterResponse = {
+    statusCode: number;
+    data: string;
+    error: string;
+}
 
 function validateEmail(email: string): boolean {
     return /^\S+@\S+$/.test(email);
@@ -13,8 +18,6 @@ interface Props {
     progress: number;
     setProgress: React.Dispatch<React.SetStateAction<number>>;
 }
-
-const SITE_KEY = 'process.env.GATSBY_SITE_KEY';
 
 const SignupForm = (props: Props) => {
     const { progress, setProgress } = props;
@@ -61,22 +64,23 @@ const SignupForm = (props: Props) => {
         }
 
         window.grecaptcha.ready(function () {
-            window.grecaptcha.execute(SITE_KEY, { action: 'submit' }).then(async function (token) {
+            window.grecaptcha.execute(process.env.GATSBY_CAPTCHA_KEY, { action: 'register' }).then(async function (token) {
                 // Send form value as well as token to the server
-                const response = await fetch('http://api.exam.acme.io/public/registrations', {
+                const response = await fetch(process.env.GATSBY_API_URL, {
                     method: 'POST',
                     credentials: 'omit',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, dob: dob.getTime() / 1000, gender, email, phone, job, token })
                 });
-                const jsonResponse = await response.json();
+                const jsonResponse = await response.json() as RegisterResponse;
                 if (jsonResponse.statusCode === 200) {
                     setEmail(email);
                     setProgress(1);
                 } else {
+                    const msg = jsonResponse.error.includes("duplicate") ? `Email ${email} đã được đăng ký vào hệ thống` : "Vui lòng kiểm tra lại thông tin";
                     toast({
                         title: "Đăng ký thất bại",
-                        description: `Vui lòng kiểm tra lại thông tin.`,
+                        description: msg,
                         status: "error",
                         duration: 2000,
                         isClosable: true,
@@ -144,7 +148,7 @@ const SignupForm = (props: Props) => {
                                 <Input isRequired={!isJobListed} id="job-other" type="tel" name="job" ref={register()} focusBorderColor="white" />
                             </GridItem>
                         </Grid>
-                        <Button mt={8} type="submit" data-action='submit' variant="bp" isLoading={isSubmitting} isFullWidth color="#b32c36">Đăng ký</Button>
+                        <Button mt={8} type="submit" variant="bp" isLoading={isSubmitting} isFullWidth color="#b32c36">Đăng ký</Button>
                     </FormControl>
                 </form>
             </Box>
