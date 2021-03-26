@@ -77,7 +77,7 @@ const SignupForm = (props: Props) => {
                     setEmail(email);
                     setProgress(1);
                 } else {
-                    const msg = jsonResponse.error.includes("duplicate") ? `Email ${email} đã được đăng ký vào hệ thống` : "Vui lòng kiểm tra lại thông tin";
+                    const msg = jsonResponse.error.includes("duplicate") ? `Email ${email} đã tồn tại trong hệ thống` : "Vui lòng kiểm tra lại thông tin";
                     toast({
                         title: "Đăng ký thất bại",
                         description: msg,
