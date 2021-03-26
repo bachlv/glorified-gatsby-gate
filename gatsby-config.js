@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Acme`,
-    description: ` Khoá học duy đất về Bug Hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu, dễ liên tưởng, kèm theo đó là các ví dụ, dẫn chứng và phân tích các lỗi bảo mật đã xảy ra trong thực tế.`,
+    description: ` Khoá học duy nhất về Bug Hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu.`,
     author: `Acme Inc.`,
   },
   plugins: [

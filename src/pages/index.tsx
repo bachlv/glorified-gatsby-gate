@@ -1,23 +1,21 @@
 import * as React from 'react';
+import { Link } from "gatsby"
 import {
-    Box, Heading, useColorMode, Fade, IconButton,
-    Button, Text, Flex, VStack, Divider,
-    useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerBody, DrawerHeader, DrawerCloseButton
+    Box, Heading, Fade, Spinner,
+    Button, Text, Flex, VStack, Divider, Center,
+    useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerBody
 } from '@chakra-ui/react';
-import { VscArrowLeft } from "react-icons/vsc";
 import SEO from '../components/seo';
-import Model3D from '../components/display/model3d';
 import { Footer } from '../components/layout/footer';
 import SignupForm from '../components/input/signup-form';
 import { RobotoMono } from '../@chakra-ui/gatsby-plugin/fonts';
+const Model3D = React.lazy(() => import('../components/display/model3d'));
 
 const IndexPage = () => {
-    const { colorMode, toggleColorMode } = useColorMode();
     const [progress, setProgress] = React.useState<number>(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const firstField = React.useRef();
-
-    React.useEffect(() => { if (colorMode === 'light') toggleColorMode(); })
+    const isSSR = typeof window === "undefined"
 
     return (
         <>
@@ -33,14 +31,17 @@ const IndexPage = () => {
                             <Divider orientation="horizontal" mb={4} />
                             <div>
                                 <Text display="inline">
-                                    Khoá học duy đất về Bug Hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu,
+                                    Khoá học duy nhất về Bug Hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu,
                                     dễ liên tưởng, kèm theo đó là các ví dụ,
                                     dẫn chứng và phân tích các lỗi bảo mật đã xảy ra trong thực tế.
                                 </Text>
                             </div>
                         </VStack>
-                        <Fade in={progress === 0}>
+                        <Fade in={progress === 0} hidden={progress === 1}>
                             <Button mx={[8, 8, 12]} mt={6} variant="bp" onClick={onOpen} colorScheme="red">Đăng ký ngay</Button>
+                        </Fade>
+                        <Fade in={progress === 1} hidden={progress === 0}>
+                            <Button as={Link} mx={[8, 8, 12]} mt={6} variant="bp" colorScheme="red" to="https://facebook.com/Acme"><a >Tìm hiểu thêm</a></Button>
                         </Fade>
                     </Box>
                 </Fade>
@@ -50,7 +51,11 @@ const IndexPage = () => {
                     position={['absolute', 'absolute', 'absolute', 'relative']}
                     opacity={[0.3, 0.3, 0.3, 1]}
                 >
-                    <Model3D />
+                    {!isSSR && (
+                        <React.Suspense fallback={<Center h="100%"><Spinner /></Center>}>
+                            <Model3D />
+                        </React.Suspense>
+                    )}
                 </Box>
             </Flex>
             <Fade in={!isOpen}>
@@ -60,7 +65,13 @@ const IndexPage = () => {
                 <DrawerOverlay>
                     <DrawerContent bg="#b32c36">
                         <DrawerBody>
-                            <Flex ref={firstField} h="100%" align="center" justify="center"><SignupForm progress={progress} setProgress={setProgress} /></Flex>
+                            <Flex ref={firstField} h="100%" align="center" justify="center">
+                                {!isSSR && (
+                                    <React.Suspense fallback={<Center h="100%"><Spinner /></Center>}>
+                                        <SignupForm progress={progress} setProgress={setProgress} />
+                                    </React.Suspense>
+                                )}
+                            </Flex>
                         </DrawerBody>
                     </DrawerContent>
                 </DrawerOverlay>

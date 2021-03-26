@@ -132,7 +132,7 @@ export const RobotoMono = () => (
     body {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      word-spacing:-3px;
+      word-spacing:-2px;
     }
     `}
   />
