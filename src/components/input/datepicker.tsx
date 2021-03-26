@@ -1,5 +1,7 @@
 import React, { HTMLAttributes } from 'react';
-import ReactDatePicker from 'react-datepicker';
+import ReactDatePicker, { registerLocale } from 'react-datepicker';
+import vi from 'date-fns/locale/vi';
+registerLocale('vi', vi);
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './datepicker.css';
@@ -24,6 +26,7 @@ const DatePicker = ({
             onChange={onChange}
             isClearable={isClearable}
             showPopperArrow={showPopperArrow}
+            locale="vi"
             maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 16))}
         />
     );

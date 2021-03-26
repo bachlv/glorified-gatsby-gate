@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {
-    Box, Heading, useColorMode, Fade, 
-    Button, Text, Flex, VStack, Divider, 
-    useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody
+    Box, Heading, useColorMode, Fade, IconButton,
+    Button, Text, Flex, VStack, Divider,
+    useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerBody, DrawerHeader, DrawerCloseButton
 } from '@chakra-ui/react';
+import { VscArrowLeft } from "react-icons/vsc";
 import SEO from '../components/seo';
 import Model3D from '../components/display/model3d';
 import { Footer } from '../components/layout/footer';
@@ -14,6 +15,7 @@ const IndexPage = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [progress, setProgress] = React.useState<number>(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const firstField = React.useRef();
 
     React.useEffect(() => { if (colorMode === 'light') toggleColorMode(); })
 
@@ -37,12 +39,14 @@ const IndexPage = () => {
                                 </Text>
                             </div>
                         </VStack>
-                        <Button mx={[8, 8, 12]} mt={6} variant="bp" onClick={onOpen} colorScheme="red">Đăng ký ngay</Button>
+                        <Fade in={progress === 0}>
+                            <Button mx={[8, 8, 12]} mt={6} variant="bp" onClick={onOpen} colorScheme="red">Đăng ký ngay</Button>
+                        </Fade>
                     </Box>
                 </Fade>
                 <Box
-                    h={["inherit", "inherit", "inherit", "90%"]}
-                    w={['100%', '100%', '100%', 'xl']}
+                    h={["inherit", "inherit", "inherit", "2xl", "3xl"]}
+                    w={['100%', '100%', '100%', 'xl', '2xl']}
                     position={['absolute', 'absolute', 'absolute', 'relative']}
                     opacity={[0.3, 0.3, 0.3, 1]}
                 >
@@ -52,12 +56,11 @@ const IndexPage = () => {
             <Fade in={!isOpen}>
                 <Footer />
             </Fade>
-            <Drawer onClose={onClose} isOpen={isOpen} size="md" >
+            <Drawer onClose={onClose} isOpen={isOpen} initialFocusRef={firstField} size="md" >
                 <DrawerOverlay>
                     <DrawerContent bg="#b32c36">
-                        {/* <DrawerHeader>{`Ahihi drawer contents`}</DrawerHeader> */}
                         <DrawerBody>
-                                <Flex h="100%" align="center" justify="center"><SignupForm progress={progress} setProgress={setProgress} /></Flex>
+                            <Flex ref={firstField} h="100%" align="center" justify="center"><SignupForm progress={progress} setProgress={setProgress} /></Flex>
                         </DrawerBody>
                     </DrawerContent>
                 </DrawerOverlay>
