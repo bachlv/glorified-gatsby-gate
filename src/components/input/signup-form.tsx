@@ -4,7 +4,7 @@ import { Button, FormControl, FormLabel, Input, Select, Grid, Box, GridItem, use
 import { SignupFormData } from '../../declaration';
 import DatePicker from './datepicker';
 import SuccessfullySubmitForm from "./successfully-submit-form";
-import { Helmet } from "react-helmet"
+
 
 function validateEmail(email: string): boolean {
     return /^\S+@\S+$/.test(email);
@@ -24,6 +24,8 @@ const SignupForm = (props: Props) => {
     const [dob, setDate] = React.useState<Date>(null)
     const [isJobListed, setJobListing] = React.useState(true);
     const [isSubmitting, setSubmitting] = React.useState(false);
+
+    React.useEffect(() => { console.log("ok")}, []);
 
     const handleJobDetail = (e) => {
         if (e.target.value == 'Khác') {
@@ -101,17 +103,13 @@ const SignupForm = (props: Props) => {
 
     if (progress === 0) return (
         <>
-            {}
-            <Helmet>
-                <script src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}></script>
-            </Helmet>
             <Box px={[8]} py={4}>
                 <form onSubmit={onSubmit}>
                     <FormControl>
                         <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                             <GridItem colSpan={5}>
                                 <FormLabel fontWeight="bold" fontSize="sm">Họ và tên</FormLabel>
-                                <Input isRequired type="text" name="name" ref={register} focusBorderColor="white" />
+                                <Input isRequired type="text" id="name" name="name" ref={register} focusBorderColor="white" />
                             </GridItem>
                             <GridItem colSpan={3}>
                                 <FormLabel fontWeight="bold" fontSize="sm" htmlFor="published-date">Ngày sinh</FormLabel>
@@ -124,7 +122,7 @@ const SignupForm = (props: Props) => {
                             </GridItem>
                             <GridItem colSpan={2}>
                                 <FormLabel fontWeight="bold" fontSize="sm">Giới tính</FormLabel>
-                                <Select isRequired name="gender" ref={register} focusBorderColor="white" defaultValue="">
+                                <Select isRequired id="gender" name="gender" ref={register} focusBorderColor="white" defaultValue="">
                                     <option disabled></option>
                                     <option>Nam</option>
                                     <option>Nữ</option>
@@ -133,15 +131,15 @@ const SignupForm = (props: Props) => {
                             </GridItem>
                             <GridItem colSpan={5}>
                                 <FormLabel fontWeight="bold" fontSize="sm">Email</FormLabel>
-                                <Input isRequired type="text" name="email" ref={register} focusBorderColor="white" />
+                                <Input isRequired id="email" type="text" name="email" ref={register} focusBorderColor="white" />
                             </GridItem>
                             <GridItem colSpan={5}>
                                 <FormLabel fontWeight="bold" fontSize="sm">Số điện thoại</FormLabel>
-                                <Input isRequired type="tel" name="phone" ref={register()} focusBorderColor="white" />
+                                <Input isRequired id="phone" type="tel" name="phone" ref={register()} focusBorderColor="white" />
                             </GridItem>
                             <GridItem colSpan={isJobListed ? 5 : 2}>
                                 <FormLabel fontWeight="bold" fontSize="sm">Nghề nghiệp</FormLabel>
-                                <Select isRequired defaultValue=""
+                                <Select isRequired id="job" defaultValue=""
                                     name="job" ref={register} focusBorderColor="white"
                                     onClick={(e) => { handleJobDetail(e) }}>
                                     <option disabled></option>
@@ -154,7 +152,7 @@ const SignupForm = (props: Props) => {
                             </GridItem>
                             <GridItem colSpan={3} hidden={isJobListed}>
                                 <FormLabel fontWeight="bold" fontSize="sm" opacity={0}>Nghề nghiệp</FormLabel>
-                                <Input isRequired={!isJobListed} type="tel" name="job" ref={register()} focusBorderColor="white" />
+                                <Input isRequired={!isJobListed} id="job-other" type="tel" name="job" ref={register()} focusBorderColor="white" />
                             </GridItem>
                         </Grid>
                         <Button mt={8} type="submit" data-action='submit' variant="bp" isLoading={isSubmitting} isFullWidth color="#b32c36">Đăng ký</Button>

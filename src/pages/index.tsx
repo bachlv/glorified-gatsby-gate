@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Link } from "gatsby"
 import {
-    Box, Heading, Fade, Spinner,
+    Box, Heading, Fade, Spinner, LinkOverlay,
     Button, Text, Flex, VStack, Divider, Center,
     useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerBody
 } from '@chakra-ui/react';
+import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
 import { Footer } from '../components/layout/footer';
 import SignupForm from '../components/input/signup-form';
@@ -21,6 +21,9 @@ const IndexPage = () => {
         <>
             <SEO title="Đăng ký khóa học" />
             <RobotoMono />
+            <Helmet>
+                <script src={`https://www.google.com/recaptcha/api.js?render=process.env.GATSBY_SITE_KEY`} async defer></script>
+            </Helmet>
             <Flex h="100vh" m="0 auto" justify="center" alignItems="center">
                 <Fade in>
                     <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
@@ -41,7 +44,7 @@ const IndexPage = () => {
                             <Button mx={[8, 8, 12]} mt={6} variant="bp" onClick={onOpen} colorScheme="red">Đăng ký ngay</Button>
                         </Fade>
                         <Fade in={progress === 1} hidden={progress === 0}>
-                            <Button as={Link} mx={[8, 8, 12]} mt={6} variant="bp" colorScheme="red" to="https://facebook.com/Acme"><a >Tìm hiểu thêm</a></Button>
+                            <Button as={LinkOverlay} mx={[8, 8, 12]} mt={6} variant="bp" colorScheme="red" href="https://facebook.com/Acme">Tìm hiểu thêm</Button>
                         </Fade>
                     </Box>
                 </Fade>
