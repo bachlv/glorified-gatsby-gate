@@ -20,8 +20,9 @@ const SuccessfullySubmitForm = (props: Props) => {
       justifyContent="center"
       textAlign="center"
       height="200px"
+      bg="unset"
     >
-      <AlertIcon boxSize="40px" mr={0} />
+      <AlertIcon boxSize="40px" mr={0} color="white"/>
       <AlertTitle mt={4} mb={1} fontSize="lg">
         Đăng ký thành công
       </AlertTitle>

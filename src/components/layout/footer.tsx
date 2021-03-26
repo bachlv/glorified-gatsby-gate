@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Flex, Center, Link } from '@chakra-ui/react';
-import { ReactProps } from '../../declaration';
 
 const Footer = () => (
-  <Center m={8} insetX={0} bottom={0} fontSize="sm">
+  <Center position="absolute" bottom={0} fontSize="sm" w="100%" mb={8}>
     {/* <Flex>0</Flex> */}
     <Flex textAlign="center" justify="center" grow={1}>
       <Link href="https://acme.io" fontWeight="normal">

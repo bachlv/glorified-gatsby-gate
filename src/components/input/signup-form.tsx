@@ -70,7 +70,7 @@ const SignupForm = (props: Props) => {
                     <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                         <GridItem colSpan={5}>
                             <FormLabel>Họ và tên</FormLabel>
-                            <Input isRequired type="text" name="name" ref={register} focusBorderColor="black"/>
+                            <Input isRequired type="text" name="name" ref={register} focusBorderColor="white"/>
                         </GridItem>
                         <GridItem colSpan={3}>
                             <FormLabel htmlFor="published-date">Ngày sinh</FormLabel>
@@ -83,7 +83,7 @@ const SignupForm = (props: Props) => {
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Giới tính</FormLabel>
-                            <Select isRequired placeholder="Chọn..." name="gender" ref={register} focusBorderColor="black">
+                            <Select isRequired placeholder="Chọn..." name="gender" ref={register} focusBorderColor="white">
                                 <option>Nam</option>
                                 <option>Nữ</option>
                                 <option>Khác</option>
@@ -91,15 +91,15 @@ const SignupForm = (props: Props) => {
                         </GridItem>
                         <GridItem colSpan={5}>
                             <FormLabel>Email</FormLabel>
-                            <Input isRequired type="text" name="email" ref={register} focusBorderColor="black" />
+                            <Input isRequired type="text" name="email" ref={register} focusBorderColor="white" />
                         </GridItem>
                         <GridItem colSpan={5}>
                             <FormLabel>Số điện thoại</FormLabel>
-                            <Input isRequired type="tel" name="phone" ref={register()} focusBorderColor="black" />
+                            <Input isRequired type="tel" name="phone" ref={register()} focusBorderColor="white" />
                         </GridItem>
                         <GridItem colSpan={5}>
                             <FormLabel>Nghề nghiệp</FormLabel>
-                            <Select isRequired placeholder="Chọn..." name="job" ref={register} focusBorderColor="black" >
+                            <Select isRequired placeholder="Chọn..." name="job" ref={register} focusBorderColor="white" >
                                 <option>Sinh viên</option>
                                 <option>Kỹ sư</option>
                                 <option>Lập trình viên</option>

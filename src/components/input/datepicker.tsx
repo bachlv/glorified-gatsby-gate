@@ -24,6 +24,7 @@ const DatePicker = ({
             onChange={onChange}
             isClearable={isClearable}
             showPopperArrow={showPopperArrow}
+            maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 16))}
         />
     );
 };

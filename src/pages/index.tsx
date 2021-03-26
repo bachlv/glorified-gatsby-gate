@@ -1,80 +1,68 @@
-// import React from "react"
-// import { Link } from "gatsby"
-
-// import Layout from "../components/layout"
-// import Image from "../components/image"
-// import SEO from "../components/seo"
-
-// const IndexPage = () => (
-//   <Layout>
-//     <SEO title="Home" />
-//     <h1>Hi people</h1>
-//     <p>Welcome to your new Gatsby site.</p>
-//     <p>Now go build something great.</p>
-//     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-//       <Image />
-//     </div>
-//     <Link to="/page-2/">Go to page 2</Link> <br />
-//     <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-//   </Layout>
-// )
-
-// export default IndexPage
-
 import * as React from 'react';
 import {
-    Box, Flex, Heading, useColorMode, SimpleGrid, Container, Stack
+    Box, Heading, useColorMode, Fade, 
+    Button, Text, Flex, VStack, Divider, 
+    useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody
 } from '@chakra-ui/react';
 import SEO from '../components/seo';
 import Model3D from '../components/display/model3d';
+import { Footer } from '../components/layout/footer';
 import SignupForm from '../components/input/signup-form';
-import { Inter } from '../@chakra-ui/gatsby-plugin/fonts';
+import { RobotoMono } from '../@chakra-ui/gatsby-plugin/fonts';
 
-const AcademyPage = () => {
+const IndexPage = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [progress, setProgress] = React.useState<number>(0);
+    const [size, setSize] = React.useState("md");
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-    if (colorMode === 'dark') toggleColorMode();
+    // if (colorMode === 'light') toggleColorMode();
     return (
         <>
             <SEO title="Đăng ký khóa học" />
-            <Inter />
-            <Flex position={'absolute'} zIndex={1} h="100vh" w="100%">
-                <Container
-                    as={SimpleGrid}
-                    maxW={'7xl'}
-                    columns={1}
-                    spacing={[{ base: 10, lg: 32 }]}
-                    // py={{ base: 10, sm: 20, lg: 32 }}
-                    m="auto"
-                >
-                    {progress === 0 &&
-                        <Stack spacing={{ base: 10, md: 10 }}>
-                            <Heading
-                                textAlign={['center', 'center']}
-                                lineHeight={2.1}
-                                fontSize={['3xl', '3xl', '5xl', '5xl', ]}
-                                marginBottom={4}
-                            >
-                                Trở thành Bug Hunter Số 1
+            <RobotoMono />
+            <Flex h="100vh" m="0 auto" justify="center" alignItems="center">
+                <Fade in>
+                    <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
+                        <VStack align="left" textAlign={['center', 'center', 'center', 'left']} spacing={3} mx={[8, 8, 12]} maxW={['md', 'lg', 'lg']}>
+                            <Heading as="h1" size="xl" letterSpacing={-2}>
+                                Trở thành Bug Hunter số 1
                             </Heading>
-                        </Stack>
-                    }
-                    <Stack
-                        bg={'gray.50'}
-                        rounded={'xl'}
-                        p={{ base: 4, sm: 6, md: 8 }}
-                        spacing={1}
-                        maxW={{ lg: 'lg' }}
-                        m="auto">
-                        <SignupForm progress={progress} setProgress={setProgress} />
-                    </Stack>
-                </Container>
+                            <Divider orientation="horizontal" mb={4} />
+                            <div>
+                                <Text display="inline">
+                                    Khoá học duy đất về bug hunting với những kiến thức chuyên môn một cách trực quan, dễ hiểu,
+                                    dễ liên tưởng, kèm theo đó là các ví dụ,
+                                    dẫn chứng và phân tích các lỗi bảo mật đã xảy ra trong thực tế.
+                                </Text>
+                            </div>
+                        </VStack>
+                        <Button mx={[8, 8, 12]} mt={6} variant="bp" onClick={onOpen} colorScheme="red">Đăng ký ngay</Button>
+                    </Box>
+                </Fade>
+                <Box
+                    h={["inherit", "inherit", "inherit", "90%"]}
+                    w={['100%', '100%', '100%', 'xl']}
+                    position={['absolute', 'absolute', 'absolute', 'relative']}
+                    opacity={[0.3, 0.3, 0.3, 1]}
+                >
+                    <Model3D />
+                </Box>
             </Flex>
-            <Box pos="absolute" mt={68} h="100vh" w="60%">
-                <Model3D />
-            </Box>
+            <Fade in={!isOpen}>
+                <Footer />
+            </Fade>
+            <Drawer onClose={onClose} isOpen={isOpen} size="md" >
+                <DrawerOverlay>
+                    <DrawerContent bg="#b32c36">
+                        {/* <DrawerHeader>{`Ahihi drawer contents`}</DrawerHeader> */}
+                        <DrawerBody>
+                                <Flex h="100%" align="center" justify="center"><SignupForm progress={progress} setProgress={setProgress} /></Flex>
+                        </DrawerBody>
+                    </DrawerContent>
+                </DrawerOverlay>
+            </Drawer>
         </>
     );
 };
-export default AcademyPage;
+export default IndexPage;

@@ -23,8 +23,8 @@
   }
   .react-datepicker__input-container:focus-within {
     z-index: 1;
-    border-color: #000000;
-    box-shadow: 0 0 0 1px #000000;
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 1px #FFFFFF;
   }
   
   .react-datepicker__input-container > input {
