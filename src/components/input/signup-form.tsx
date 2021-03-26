@@ -25,8 +25,6 @@ const SignupForm = (props: Props) => {
     const [isJobListed, setJobListing] = React.useState(true);
     const [isSubmitting, setSubmitting] = React.useState(false);
 
-    React.useEffect(() => { console.log("ok")}, []);
-
     const handleJobDetail = (e) => {
         if (e.target.value == 'Khác') {
             setJobListing(false);
@@ -42,6 +40,7 @@ const SignupForm = (props: Props) => {
         setSubmitting(true);
 
         if (!dob) {
+            setSubmitting(false);
             return toast({
                 title: "Đăng ký thất bại",
                 description: "Bạn chưa điền ngày sinh",
@@ -51,19 +50,10 @@ const SignupForm = (props: Props) => {
             });
         }
         if (!validateEmail(email)) {
+            setSubmitting(false);
             return toast({
                 title: "Đăng ký thất bại",
                 description: "Email không đúng định dạng",
-                status: "error",
-                duration: 2000,
-                isClosable: true,
-            });
-        }
-
-        if (job === "Khác") {
-            return toast({
-                title: "Đăng ký thất bại",
-                description: "Khacs",
                 status: "error",
                 duration: 2000,
                 isClosable: true,
@@ -94,7 +84,6 @@ const SignupForm = (props: Props) => {
                 }
             });
         });
-
 
         setSubmitting(false);
     });

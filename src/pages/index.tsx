@@ -15,16 +15,20 @@ const IndexPage = () => {
     const [progress, setProgress] = React.useState<number>(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const firstField = React.useRef();
-    const isSSR = typeof window === "undefined"
+    const isSSR = typeof window === 'undefined';
+
+    React.useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js?render=process.env.GATSBY_SITE_KEY';
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
 
     return (
         <>
             <SEO title="Đăng ký khóa học" />
             <RobotoMono />
-            <Helmet>
-                <script src={`https://www.google.com/recaptcha/api.js?render=process.env.GATSBY_SITE_KEY`} async defer></script>
-            </Helmet>
-            <Flex h="100vh" m="0 auto" justify="center" alignItems="center">
+            <Flex h="100vh" maxH="-webkit-fill-available" m="0 auto" justify="center" alignItems="center">
                 <Fade in>
                     <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
                         <VStack align="left" textAlign={['center', 'center', 'center', 'left']} spacing={3} mx={[8, 8, 12]} maxW={['md', 'lg', 'lg']}>
