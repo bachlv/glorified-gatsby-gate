@@ -29,8 +29,8 @@ const IndexPage = () => {
             <RobotoMono />
             <Flex h="100vh" maxH="-webkit-fill-available" m="0 auto" justify="center" alignItems="center">
                 <Fade in>
-                    <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
-                        <VStack align="left" textAlign={['center', 'center', 'center', 'left']} spacing={3} mx={[8, 8, 12]} maxW={['md', 'lg', 'lg']}>
+                    <Box zIndex={1} position="relative" maxW={96} textAlign={['center', null, null, 'left']}>
+                        <VStack align="left" textAlign={['center', null, null, 'left']} spacing={3} mx={[8, 8, 12]} maxW={['md', null, 'lg']}>
                             <Heading as="h1" size="xl" letterSpacing={-2}>
                                 Trở thành Bug Hunter số 1
                             </Heading>
@@ -52,10 +52,10 @@ const IndexPage = () => {
                     </Box>
                 </Fade>
                 <Box
-                    h={["inherit", "inherit", "inherit", "2xl", "3xl"]}
-                    w={['100%', '100%', '100%', 'xl', '2xl']}
-                    position={['absolute', 'absolute', 'absolute', 'relative']}
-                    opacity={[0.3, 0.3, 0.3, 1]}
+                    h={["inherit", null, null, "2xl", "3xl"]}
+                    w={['100%', null, null, 'xl', '2xl']}
+                    position={['absolute', null, null, 'relative']}
+                    opacity={[0.3, null, null, 1]}
                 >
                     {!isSSR && (
                         <React.Suspense fallback={<Center h="100%"><Spinner /></Center>}>

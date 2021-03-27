@@ -5,6 +5,7 @@ import { defaultFont } from './fonts';
 const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
+    cssVarPrefix: 'acme',
   },
   fonts: {
     heading: defaultFont,
