@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Global } from '@emotion/react';
 
-export const defaultFont = `'Roboto Mono', 'Circular', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-'localhost', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`;
+export const defaultFont = `'Roboto Mono', monospace`;
 
 export const Circular = () => (
   <Global

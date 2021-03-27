@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react';
 import SEO from '../components/seo';
 import { Footer } from '../components/layout/footer';
+import { RobotoMono } from '../@chakra-ui/gatsby-plugin/fonts';
 import SignupForm from '../components/input/signup-form';
 const Model3D = React.lazy(() => import('../components/display/model3d'));
 
@@ -25,6 +26,7 @@ const IndexPage = () => {
     return (
         <>
             <SEO title="Đăng ký khóa học" />
+            <RobotoMono />
             <Flex h="100vh" maxH="-webkit-fill-available" m="0 auto" justify="center" alignItems="center">
                 <Fade in>
                     <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
