@@ -4,11 +4,9 @@ import {
     Button, Text, Flex, VStack, Divider, Center,
     useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerBody
 } from '@chakra-ui/react';
-import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
 import { Footer } from '../components/layout/footer';
 import SignupForm from '../components/input/signup-form';
-import { RobotoMono } from '../@chakra-ui/gatsby-plugin/fonts';
 const Model3D = React.lazy(() => import('../components/display/model3d'));
 
 const IndexPage = () => {
@@ -27,7 +25,6 @@ const IndexPage = () => {
     return (
         <>
             <SEO title="Đăng ký khóa học" />
-            <RobotoMono />
             <Flex h="100vh" maxH="-webkit-fill-available" m="0 auto" justify="center" alignItems="center">
                 <Fade in>
                     <Box zIndex={1} position="relative" maxW={96} textAlign={['center', 'center', 'center', 'left']}>
