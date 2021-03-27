@@ -72,6 +72,7 @@ const SignupForm = (props: Props) => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, dob: dob.getTime() / 1000, gender, email, phone, job, token })
                 });
+                setSubmitting(false);
                 const jsonResponse = await response.json() as RegisterResponse;
                 if (jsonResponse.statusCode === 200) {
                     setEmail(email);
@@ -89,7 +90,6 @@ const SignupForm = (props: Props) => {
             });
         });
 
-        setSubmitting(false);
     });
 
     if (progress === 1) return <SuccessfullySubmitForm email={email} />
@@ -134,7 +134,7 @@ const SignupForm = (props: Props) => {
                                 <FormLabel fontWeight="bold" fontSize="sm">Nghề nghiệp</FormLabel>
                                 <Select isRequired id="job" defaultValue=""
                                     name="job" ref={register} focusBorderColor="white"
-                                    onClick={(e) => { handleJobDetail(e) }}>
+                                    onChange={(e) => { handleJobDetail(e) }}>
                                     <option disabled></option>
                                     <option>Sinh viên</option>
                                     <option>Lập trình viên</option>
@@ -148,7 +148,7 @@ const SignupForm = (props: Props) => {
                                 <Input isRequired={!isJobListed} id="job-other" type="tel" name="job" ref={register()} focusBorderColor="white" />
                             </GridItem>
                         </Grid>
-                        <Button mt={8} type="submit" variant="bp" isLoading={isSubmitting} isFullWidth color="#b32c36">Đăng ký</Button>
+                        <Button mt={8} type="submit" variant="bp" isLoading={isSubmitting} isFullWidth color="acmeRed">Đăng ký</Button>
                     </FormControl>
                 </form>
             </Box>

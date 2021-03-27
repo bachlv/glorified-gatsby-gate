@@ -1,19 +1,13 @@
 import React, { HTMLAttributes } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
+import vi from "date-fns/locale/vi";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './datepicker.css';
 
-const monthValues = ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu', 'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'];
-const dayValues = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
-
-registerLocale('vi', {
-  localize: {
-    month: n => monthValues[n],
-    day: n => dayValues[n]
-  }, 
-  formatLong:{} 
-});
+const weekdays = [...Array(7).keys()].map(i => vi.localize.day(i, { width: 'narrow' }))
+vi.localize.day = (n) => weekdays[n];
+registerLocale("vi", vi);
 
 interface Props {
     isClearable?: boolean;
@@ -31,12 +25,13 @@ const DatePicker = ({
 }: Props & HTMLAttributes<HTMLElement>) => {
     return (
         <ReactDatePicker
-            dateFormat="dd/MM/yyyy"
             selected={selectedDate}
             onChange={onChange}
             isClearable={isClearable}
             showPopperArrow={showPopperArrow}
+            dateFormat="dd/MM/yyyy"
             locale="vi"
+            required
             maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 16))}
         />
     );
